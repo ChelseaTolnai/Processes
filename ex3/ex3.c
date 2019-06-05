@@ -9,7 +9,20 @@
 
 int main(void)
 {
-    // Your code here
+    int rc = fork();
+    if (rc < 0) {
+        fprintf(stderr, "fork failed\n");
+        exit(1);
+    } else if (rc == 0) {
+        printf("hello\n");
+    } else {
+        wait(&rc);
+        printf("goodbye\n");
+    }
 
     return 0;
 }
+
+// RETURNS
+// hello
+// goodbye
